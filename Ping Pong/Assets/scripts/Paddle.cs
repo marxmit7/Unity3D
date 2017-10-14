@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Paddle : MonoBehaviour 
-{
-	public float paddleSpeed = 1;
-	public Vector3 playerPos;
 
-	void Update()
-	{
-		float yPos = transform.position.y + (Input.GetAxis("Vertical") * paddleSpeed);
-		playerPos = new Vector3(-18, Mathf.Clamp(yPos, -11, 11), 0);
-		transform.position = playerPos;
+private Vector3 MovingDirection = Vector3.up;
+
+void Update () {
+	gameObject.transform.Translate(MovingDirection * Time.smoothDeltaTime);
+
+	if(gameObject.transform.position.y > 3){
+		MovingDirection = Vector3.down;
+	}else if (gameObject.transform.position.y < -3) {
+		MovingDirection = Vector3.up;
 	}
 }
